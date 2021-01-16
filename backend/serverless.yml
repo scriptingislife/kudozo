@@ -1,6 +1,6 @@
-# Praize configuration
+# Serverless backend configuration
 
-service: praize
+service: sitefeedback
 
 frameworkVersion: '2'
 
