@@ -1,2 +1,3 @@
-# thumbsup
-Widget to get basic feedback on blog posts.
+# kudozo
+
+Get basic feedback on blog posts.

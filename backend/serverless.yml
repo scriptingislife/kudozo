@@ -14,6 +14,7 @@ provider:
   region: us-east-1
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    FEEDBACK_URL: { "Fn::Join" : ["", ["https://", { "Ref" : "ApiGatewayRestApi" }, ".execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}/feedback" ] ]  }
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -27,12 +28,18 @@ provider:
 
 functions:
   feedback:
-    handler: feedback.main
+    handler: feedback/feedback.main
     events:
       - http:
           path: feedback
           method: post
           cors: true
+  html:
+    handler: html/html.main
+    events:
+      - http:
+          path: button.html
+          method: get
 
 resources:
   Resources:

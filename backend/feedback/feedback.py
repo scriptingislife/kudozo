@@ -7,8 +7,21 @@ import boto3
 
 dynamodb = boto3.resource('dynamodb')
 
+def handle_error(message):
+    return {
+        "statusCode": 500,
+        "body": message,
+        "headers": {
+            "Access-Control-ALlow-Origin": "*"
+        }
+    }
+
 def main(event, context):
-    data = json.loads(event['body'])
+    try:
+        data = json.loads(event['body'])
+    except:
+        print(event['body'])
+        return handle_error("Could not convert body to JSON.")
     if 'value' not in data:
         logging.error("Validation Failed")
         raise Exception("Couldn't create feedback item.")
@@ -32,7 +45,10 @@ def main(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(body),
+        "headers": {
+            "Access-Control-Allow-Origin": "*"
+        }
     }
 
     return response
