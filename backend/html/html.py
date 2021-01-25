@@ -22,7 +22,8 @@ def main(event, context):
 <script>
     function sendfeedback(value) {
         var FEEDBACK_URL = "%s";
-        var path = window.location.pathname;
+        var site_url = (self===top) ? document.URL : document.referrer;
+        var path = new URL(site_url).pathname;
         if (value == 1) {
             console.log("Helpful.");
         } else if (value == 0) {
@@ -30,7 +31,7 @@ def main(event, context):
         } else {
             return 0;
         }
-        $.post(FEEDBACK_URL, JSON.stringify({"value": value}), function() {
+        $.post(FEEDBACK_URL, JSON.stringify({"value": value, "path": path}), function() {
             console.log("Sent feedback!");
         }, "json");
         $('.feedback').hide();

@@ -22,7 +22,7 @@ def main(event, context):
     except:
         print(event['body'])
         return handle_error("Could not convert body to JSON.")
-    if 'value' not in data:
+    if 'value' not in data or 'path' not in data:
         logging.error("Validation Failed")
         raise Exception("Couldn't create feedback item.")
 
@@ -32,6 +32,7 @@ def main(event, context):
     item = {
         'id': str(uuid.uuid1()),
         'createdAt': timestamp,
+        'path': data["path"],
         'value': data["value"]
     }
 
