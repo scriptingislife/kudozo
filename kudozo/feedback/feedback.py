@@ -39,9 +39,7 @@ def main(event, context):
     table.put_item(Item=item)
 
     body = {
-        "message": "Thank you for your feedback!",
-        "item": item,
-        "input": event
+        "message": "Thank you for your feedback!"
     }
 
     response = {
