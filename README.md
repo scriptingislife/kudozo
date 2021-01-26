@@ -2,7 +2,7 @@
 
 Get basic feedback on blog posts.
 
-![Button Example](res/button-example.png)
+<img src="res/button-example.png" alt="Button Example" height="200" />
 
 ## Cloud Infrastructure
 
