@@ -10,6 +10,7 @@ This project uses the [Serverless Framework](https://www.serverless.com/framewor
 
 ```
 1. Deploy the infrastructure
+cd kudozo/
 serverless deploy --stage production
 
 2. Copy the GET URL in the output
