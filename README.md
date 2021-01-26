@@ -4,10 +4,6 @@ Get basic feedback on blog posts.
 
 <img src="res/button-example.png" alt="Button Example" height="200" />
 
-## Cloud Infrastructure
-
-![Infrastructure Diagram](res/infra.png)
-
 ## Deployment
 
 This project uses the [Serverless Framework](https://www.serverless.com/framework/docs/getting-started/).
@@ -24,3 +20,7 @@ serverless deploy --stage production
 
 4. Start receiving feedback.
 ```
+
+## Cloud Infrastructure
+
+![Infrastructure Diagram](res/infra.png)
