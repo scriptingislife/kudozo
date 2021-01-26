@@ -1,10 +1,4 @@
-import os
-import json
-import datetime
-
-
-def main(event, context):
-    body = """<style>
+<style>
     .feedback {
     font-family:'Courier New', Courier, monospace;
     padding: 10px;
@@ -42,15 +36,4 @@ def main(event, context):
     <div class="feedback" id="feedback-pos" onclick="sendfeedback(1)">Helpful</div>
     <div class="feedback" id="feedback-neg" onclick="sendfeedback(0)">Not Helpful</div>
     <div class="feedback" id="feedback-thx">Thank you for your feedback!</div>
-</div>"""
-
-    response = {
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": "text/html",
-            "Access-Control-Allow-Origin": "*"
-        },
-        "body": body%os.environ.get("FEEDBACK_URL")
-    }
-
-    return response
+</div>
