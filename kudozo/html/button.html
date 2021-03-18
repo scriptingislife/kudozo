@@ -25,7 +25,7 @@
         } else {
             return 0;
         }
-        $.post(FEEDBACK_URL, JSON.stringify({"value": value, "path": path}), function() {
+        $.post(FEEDBACK_URL, JSON.stringify({"value": value, "path": path, "url": site_url}), function() {
             console.log("Sent feedback!");
         }, "json");
         $('.feedback').hide();

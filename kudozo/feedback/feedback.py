@@ -5,6 +5,8 @@ import time
 import uuid
 import boto3
 
+logging.basicConfig(level=logging.DEBUG)
+
 dynamodb = boto3.resource('dynamodb')
 
 def handle_error(message):
@@ -26,13 +28,16 @@ def main(event, context):
         logging.error("Validation Failed")
         raise Exception("Couldn't create feedback item.")
 
+    src_ip = event['requestContext']['identity']['sourceIp']
     timestamp = str(time.time())
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
 
     item = {
         'id': str(uuid.uuid1()),
         'createdAt': timestamp,
+        'src_ip': src_ip,
         'path': data["path"],
+        'url': data['url'],
         'value': data["value"]
     }
 
