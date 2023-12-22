@@ -17,6 +17,8 @@ $ serverless deploy --stage production
 
 3. Add the code to your website
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>$(function(){let a=$("#feedback-obj").attr("data");var e=self===top?document.URL:document.referrer;let t=a+encodeURIComponent(e);$("#feedback-obj").attr("data",t)});</script>
 <object data="https://UNIQUE.execute-api.us-east-1.amazonaws.com/production/button.html"></object>
 
 4. Start receiving feedback.

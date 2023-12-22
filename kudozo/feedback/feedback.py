@@ -4,6 +4,7 @@ import os
 import time
 import uuid
 import boto3
+import requests
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -14,7 +15,7 @@ def handle_error(message):
         "statusCode": 500,
         "body": message,
         "headers": {
-            "Access-Control-ALlow-Origin": "*"
+            "Access-Control-Allow-Origin": "*"
         }
     }
 
@@ -31,6 +32,21 @@ def main(event, context):
     src_ip = event['requestContext']['identity']['sourceIp']
     timestamp = str(time.time())
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+
+    # Post feedback to Discord
+    try:
+        if int(data["value"]) == 0:
+            feedback_long = "Not Helpful"
+        elif int(data["value"]) == 1:
+            feedback_long = "Helpful"
+        webhook = os.environ["WEBHOOK_URL"]
+        path = data["path"]
+        discord_data = {
+            "content": f"Feedback for \"{path}\": {feedback_long}"
+        }
+        requests.post(webhook, data=discord_data)
+    except:
+        pass
 
     item = {
         'id': str(uuid.uuid1()),

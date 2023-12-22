@@ -16,7 +16,12 @@
 <script>
     function sendfeedback(value) {
         var FEEDBACK_URL = "%s";
-        var site_url = (self===top) ? document.URL : document.referrer;
+        var ORIGIN = "%s";
+        if (ORIGIN == "") {
+            var site_url = (self===top) ? document.URL : document.referrer;
+        } else {
+            var site_url = ORIGIN;
+        }
         var path = new URL(site_url).pathname;
         if (value == 1) {
             console.log("Helpful.");

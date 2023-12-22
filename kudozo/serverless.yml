@@ -2,7 +2,7 @@
 
 service: sitefeedback
 
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 provider:
   name: aws
@@ -28,6 +28,10 @@ provider:
 
 custom:
   default_stage: dev
+  pythonRequirements:
+    dockerizePip: non-linux
+
+useDotenv: true
 
 functions:
   feedback:
@@ -37,11 +41,19 @@ functions:
           path: feedback
           method: post
           cors: true
+    environment:
+      WEBHOOK_URL: ${env:WEBHOOK_URL}
   html:
     handler: html/html.main
     events:
       - http:
           path: button.html
+          method: get
+  admin:
+    handler: admin/admin.main
+    events:
+      - http:
+          path: admin
           method: get
 
 resources:
@@ -62,3 +74,5 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.DYNAMODB_TABLE}
+plugins:
+  - serverless-python-requirements
